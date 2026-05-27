@@ -1,6 +1,8 @@
 package simuladorcuartofrioindustrial;
 
-public abstract class Sensor {
+import java.io.Serializable;
+
+public abstract class Sensor implements Serializable{
 
     protected String id;
     protected String nombre;
