@@ -4,13 +4,21 @@ import java.util.ArrayList;
 
 public class GestorSensores {
 
-    private ArrayList<Sensor> sensores;
+    private ArrayList<Sensor> listaSensores;
 
     public GestorSensores() {
-        sensores = new ArrayList<>();
+        listaSensores = new ArrayList<>();
     }
 
     public void agregarSensor(Sensor sensor) {
-        sensores.add(sensor);
+        listaSensores.add(sensor);
+    }
+
+    public ArrayList<Sensor> getSensores() {
+        return listaSensores;
+    }
+
+    public void setSensores(ArrayList<Sensor> listaSensores) {
+        this.listaSensores = listaSensores;
     }
 }

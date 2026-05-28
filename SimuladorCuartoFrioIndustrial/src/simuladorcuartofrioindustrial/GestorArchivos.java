@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 public class GestorArchivos {
 
-    private File archivo;
+    private String archivo;
 
-    public GestorArchivos(File archivo) {
+    public GestorArchivos(String archivo) {
         this.archivo = archivo;
     }
 

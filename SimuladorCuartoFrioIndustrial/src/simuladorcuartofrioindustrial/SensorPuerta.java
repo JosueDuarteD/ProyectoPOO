@@ -34,6 +34,6 @@ public class SensorPuerta extends Sensor {
     @Override
     public String toString() {
         String estado = (getValorActual() == 1) ? "Abierta" : "Cerrada";
-        return "SensorPuerta id: " + id + ", nombre: " + nombre + ", Estado puerta: " + estado;
+        return "SensorPuerta id: " + super.getId() + ", nombre: " + super.getNombre() + ", Estado puerta: " + estado;
     }
 }

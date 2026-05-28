@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public abstract class Sensor implements Serializable{
 
-    protected String id;
-    protected String nombre;
-    protected double valorActual;
-    protected double limiteInferior;
-    protected double limiteSuperior;
+    private String id;
+    private String nombre;
+    private double valorActual;
+    private double limiteInferior;
+    private double limiteSuperior;
 
 //----------------------------------------------------------------------------------------------
     public Sensor(String id, String nombre, double limiteInferior, double limiteSuperior) throws ParametroFueraDeRangoException {

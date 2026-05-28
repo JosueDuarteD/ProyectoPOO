@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 public class GestorPersistenciaSensores {
 
-    private File archivo;
+    private String archivo;
 
-    public GestorPersistenciaSensores(File archivo) {
+    public GestorPersistenciaSensores(String archivo) {
         this.archivo = archivo;
     }
 

@@ -1,22 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package simuladorcuartofrioindustrial;
 
-/**
- *
- * @author Alberto
- */
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SimuladorCuartoFrioIndustrial.class.getName());
 
-    /**
-     * Creates new form SimuladorCuartoFrioIndustrial
-     */
+    private GestorPersistenciaSensores gestorPersistencia;
+    private GestorArchivos gestorArchivos;
+    private GestorSensores gestorSensores;
+    
     public SimuladorCuartoFrioIndustrial() {
         initComponents();
+        
+        MensajeBienvenida pagina = new MensajeBienvenida();
+        MostrarPagina(pagina);
+        
     }
 
     /**
@@ -28,22 +28,162 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FondoBlanco = new javax.swing.JPanel();
+        probarCuarto = new javax.swing.JButton();
+        configurarCuarto = new javax.swing.JButton();
+        cargarTexto = new javax.swing.JButton();
+        cargarObjetos = new javax.swing.JButton();
+        FondoVariable = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("                                                                                                MONITOR DE SENSORES PARA CUARTO FRIO");
+        setPreferredSize(new java.awt.Dimension(900, 700));
+        setResizable(false);
+
+        FondoBlanco.setBackground(new java.awt.Color(255, 255, 255));
+        FondoBlanco.setPreferredSize(new java.awt.Dimension(900, 700));
+
+        probarCuarto.setBackground(new java.awt.Color(60, 98, 85));
+        probarCuarto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        probarCuarto.setForeground(new java.awt.Color(255, 255, 255));
+        probarCuarto.setText("Probar cuarto");
+        probarCuarto.setMaximumSize(new java.awt.Dimension(130, 40));
+        probarCuarto.setOpaque(true);
+        probarCuarto.setPreferredSize(new java.awt.Dimension(130, 40));
+        probarCuarto.addActionListener(this::probarCuartoActionPerformed);
+
+        configurarCuarto.setBackground(new java.awt.Color(60, 98, 85));
+        configurarCuarto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        configurarCuarto.setForeground(new java.awt.Color(255, 255, 255));
+        configurarCuarto.setText("Configurar cuarto");
+        configurarCuarto.setToolTipText("");
+        configurarCuarto.setMaximumSize(new java.awt.Dimension(130, 40));
+        configurarCuarto.setPreferredSize(new java.awt.Dimension(130, 40));
+        configurarCuarto.addActionListener(this::configurarCuartoActionPerformed);
+
+        cargarTexto.setBackground(new java.awt.Color(60, 98, 85));
+        cargarTexto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cargarTexto.setForeground(new java.awt.Color(255, 255, 255));
+        cargarTexto.setText("Cargar textos");
+        cargarTexto.setMaximumSize(new java.awt.Dimension(130, 40));
+        cargarTexto.setPreferredSize(new java.awt.Dimension(130, 40));
+        cargarTexto.addActionListener(this::cargarTextoActionPerformed);
+
+        cargarObjetos.setBackground(new java.awt.Color(60, 98, 85));
+        cargarObjetos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cargarObjetos.setForeground(new java.awt.Color(255, 255, 255));
+        cargarObjetos.setText("Cargar objetos");
+        cargarObjetos.setActionCommand("Cargar objetos");
+        cargarObjetos.setMaximumSize(new java.awt.Dimension(130, 40));
+        cargarObjetos.setOpaque(true);
+        cargarObjetos.setPreferredSize(new java.awt.Dimension(130, 40));
+        cargarObjetos.addActionListener(this::cargarObjetosActionPerformed);
+
+        FondoVariable.setBackground(new java.awt.Color(60, 98, 85));
+        FondoVariable.setPreferredSize(new java.awt.Dimension(700, 500));
+
+        javax.swing.GroupLayout FondoVariableLayout = new javax.swing.GroupLayout(FondoVariable);
+        FondoVariable.setLayout(FondoVariableLayout);
+        FondoVariableLayout.setHorizontalGroup(
+            FondoVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+        FondoVariableLayout.setVerticalGroup(
+            FondoVariableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout FondoBlancoLayout = new javax.swing.GroupLayout(FondoBlanco);
+        FondoBlanco.setLayout(FondoBlancoLayout);
+        FondoBlancoLayout.setHorizontalGroup(
+            FondoBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoBlancoLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addGroup(FondoBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FondoVariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(FondoBlancoLayout.createSequentialGroup()
+                        .addComponent(probarCuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(configurarCuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(cargarTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(cargarObjetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(103, 103, 103))
+        );
+        FondoBlancoLayout.setVerticalGroup(
+            FondoBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoBlancoLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(FondoBlancoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(probarCuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(configurarCuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargarTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargarObjetos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(FondoVariable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
+        );
+
+        probarCuarto.getAccessibleContext().setAccessibleName("sfsd");
+        probarCuarto.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(FondoBlanco, javax.swing.GroupLayout.PREFERRED_SIZE, 906, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(FondoBlanco, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void probarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarCuartoActionPerformed
+        SimuladorCFI pagina = new SimuladorCFI();
+        MostrarPagina(pagina);
+    }//GEN-LAST:event_probarCuartoActionPerformed
+
+    private void cargarTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarTextoActionPerformed
+        CargadorTexto pagina= new CargadorTexto(this);
+        MostrarPagina(pagina);
+    }//GEN-LAST:event_cargarTextoActionPerformed
+
+    private void configurarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configurarCuartoActionPerformed
+        ConfigurarcionCuarto pagina = new ConfigurarcionCuarto();
+        MostrarPagina(pagina);
+    }//GEN-LAST:event_configurarCuartoActionPerformed
+
+    private void cargarObjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarObjetosActionPerformed
+        CargardorObjetos pagina = new CargardorObjetos(this);
+        MostrarPagina(pagina);
+    }//GEN-LAST:event_cargarObjetosActionPerformed
+
+    private void MostrarPagina(JPanel pagina){
+        pagina.setSize(700, 500);
+        pagina.setLocation(0, 0);
+        
+        FondoVariable.removeAll();
+        FondoVariable.add(pagina, BorderLayout.CENTER);
+        FondoVariable.revalidate();
+        FondoVariable.repaint();
+    }
+    
+    public void procesarArchivoCargado(java.io.File archivo) {
+        String nombre = archivo.getName().toLowerCase();
+    
+        if (nombre.endsWith(".bin")) {
+            this.gestorPersistencia = new GestorPersistenciaSensores(archivo.getName());
+        } else if (nombre.endsWith(".txt")) {
+            this.gestorArchivos = new GestorArchivos(archivo.getName());
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Formato de archivo no soportado.");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -70,5 +210,11 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel FondoBlanco;
+    private javax.swing.JPanel FondoVariable;
+    private javax.swing.JButton cargarObjetos;
+    private javax.swing.JButton cargarTexto;
+    private javax.swing.JButton configurarCuarto;
+    private javax.swing.JButton probarCuarto;
     // End of variables declaration//GEN-END:variables
 }
