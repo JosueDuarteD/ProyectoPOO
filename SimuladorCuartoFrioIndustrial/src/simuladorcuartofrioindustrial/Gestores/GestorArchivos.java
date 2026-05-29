@@ -1,4 +1,4 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.Gestores;
 
 import java.io.*;
 import java.time.LocalDateTime;

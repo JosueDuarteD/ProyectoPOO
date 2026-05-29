@@ -1,4 +1,8 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.Sensores;
+
+import simuladorcuartofrioindustrial.Excepciones.ParametroFueraDeRangoException;
+import simuladorcuartofrioindustrial.Excepciones.PuertaAbiertaException;
+import simuladorcuartofrioindustrial.Sensores.Sensor;
 
 public class SensorPuerta extends Sensor {
 

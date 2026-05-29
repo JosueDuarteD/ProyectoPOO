@@ -1,6 +1,8 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.Sensores;
 
 import java.io.Serializable;
+import simuladorcuartofrioindustrial.Excepciones.ParametroFueraDeRangoException;
+import simuladorcuartofrioindustrial.Excepciones.RangoVacioException;
 
 public abstract class Sensor implements Serializable{
 

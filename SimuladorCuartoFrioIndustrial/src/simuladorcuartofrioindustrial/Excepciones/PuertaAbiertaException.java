@@ -1,4 +1,4 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.Excepciones;
 
 public class PuertaAbiertaException extends Exception {
 

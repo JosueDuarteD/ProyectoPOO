@@ -1,11 +1,20 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.InterfazGrafica;
 
+import simuladorcuartofrioindustrial.InterfazGrafica.CargardorObjetos;
+import simuladorcuartofrioindustrial.InterfazGrafica.CargadorTexto;
+import simuladorcuartofrioindustrial.InterfazGrafica.ConfiguracionCuarto;
+import simuladorcuartofrioindustrial.InterfazGrafica.Simulador;
+import simuladorcuartofrioindustrial.InterfazGrafica.MensajeBienvenida;
+import simuladorcuartofrioindustrial.Gestores.GestorPersistenciaSensores;
+import simuladorcuartofrioindustrial.Gestores.GestorSensores;
+import simuladorcuartofrioindustrial.Gestores.GestorArchivos;
+import simuladorcuartofrioindustrial.Sensores.Sensor;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
-public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
+public class ControladorInterfaces extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SimuladorCuartoFrioIndustrial.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ControladorInterfaces.class.getName());
 
     private GestorPersistenciaSensores gestorPersistencia = new GestorPersistenciaSensores("sin_nombre.bin");
     private GestorArchivos gestorArchivos = new GestorArchivos("sin_nombre.txt");;
@@ -13,7 +22,7 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     private java.time.LocalDateTime fechaHoraInicio;
     private String fechaHoraFormateada;
     
-    public SimuladorCuartoFrioIndustrial() {
+    public ControladorInterfaces() {
         initComponents();
         
         MensajeBienvenida pagina = new MensajeBienvenida();
@@ -39,7 +48,6 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("                                                                                                MONITOR DE SENSORES PARA CUARTO FRIO");
-        setPreferredSize(new java.awt.Dimension(900, 700));
         setResizable(false);
 
         FondoBlanco.setBackground(new java.awt.Color(255, 255, 255));
@@ -144,7 +152,7 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void probarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarCuartoActionPerformed
-        SimuladorCFI pagina = new SimuladorCFI(this);
+        Simulador pagina = new Simulador(this);
         MostrarPagina(pagina);
     }//GEN-LAST:event_probarCuartoActionPerformed
 
@@ -228,7 +236,7 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new SimuladorCuartoFrioIndustrial().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new ControladorInterfaces().setVisible(true));
     }
     
     public GestorSensores getGestorSensores() {

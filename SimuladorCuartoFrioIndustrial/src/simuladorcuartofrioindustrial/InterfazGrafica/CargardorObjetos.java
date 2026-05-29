@@ -1,13 +1,18 @@
-package simuladorcuartofrioindustrial;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
+package simuladorcuartofrioindustrial.InterfazGrafica;
 
-public class CargadorTexto extends javax.swing.JPanel {
 
-    private SimuladorCuartoFrioIndustrial framePrincipal;
-    
-    public CargadorTexto(SimuladorCuartoFrioIndustrial framePrincipal) {
+public class CargardorObjetos extends javax.swing.JPanel {
+
+    private ControladorInterfaces framePrincipal;
+
+    public CargardorObjetos(ControladorInterfaces framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
-        jFileChooser1.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de Datos (*.txt)", "txt"));
+        jFileChooser1.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos de Datos (*.bin)", "bin"));
     }
 
     /**
@@ -28,10 +33,10 @@ public class CargadorTexto extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(60, 98, 85));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cargar textos de aviso");
+        jLabel1.setText("Cargar lista de Sensores");
         jLabel1.setMaximumSize(new java.awt.Dimension(310, 30));
         jLabel1.setOpaque(true);
-        jLabel1.setPreferredSize(new java.awt.Dimension(400, 30));
+        jLabel1.setPreferredSize(new java.awt.Dimension(310, 30));
 
         jFileChooser1.setPreferredSize(new java.awt.Dimension(600, 300));
         jFileChooser1.addActionListener(this::jFileChooser1ActionPerformed);
@@ -41,13 +46,14 @@ public class CargadorTexto extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -62,24 +68,23 @@ public class CargadorTexto extends javax.swing.JPanel {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         String comando = evt.getActionCommand();
-
         if (comando.equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
             java.io.File archivoSeleccionado = jFileChooser1.getSelectedFile();
 
             try {
                 this.framePrincipal.procesarArchivoCargado(archivoSeleccionado);
-
+                this.framePrincipal.recargarSensoresDesdeArchivoBinario();
                 javax.swing.JOptionPane.showMessageDialog(
                     this,
-                    "¡Archivo de historial/reporte cargado con éxito!\nOrigen: " + archivoSeleccionado.getName(),
+                    "¡Archivo de sensores cargado con éxito!\nOrigen: " + archivoSeleccionado.getName(),
                     "Carga Exitosa",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE
-                );
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
 
             } catch (Exception e) {
                 javax.swing.JOptionPane.showMessageDialog(
                     this,
-                    "Error al procesar el archivo de texto seleccionado:\n" + e.getMessage(),
+                    "Error al procesar la estructura del archivo binario:\n" + e.getMessage(),
                     "Error de Lectura",
                     javax.swing.JOptionPane.ERROR_MESSAGE
                 );

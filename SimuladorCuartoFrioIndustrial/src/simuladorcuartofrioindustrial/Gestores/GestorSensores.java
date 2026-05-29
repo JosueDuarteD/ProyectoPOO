@@ -1,5 +1,6 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.Gestores;
 
+import simuladorcuartofrioindustrial.Sensores.Sensor;
 import java.util.ArrayList;
 
 public class GestorSensores {

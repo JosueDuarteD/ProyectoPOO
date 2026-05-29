@@ -1,10 +1,18 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.InterfazGrafica;
+
+import simuladorcuartofrioindustrial.Gestores.GestorPersistenciaSensores;
+import simuladorcuartofrioindustrial.Gestores.GestorArchivos;
+import simuladorcuartofrioindustrial.Excepciones.ParametroFueraDeRangoException;
+import simuladorcuartofrioindustrial.Sensores.SensorTemperatura;
+import simuladorcuartofrioindustrial.Sensores.SensorPuerta;
+import simuladorcuartofrioindustrial.Sensores.SensorPresion;
+import simuladorcuartofrioindustrial.Sensores.Sensor;
 
 public class ConfiguracionCuarto extends javax.swing.JPanel {
     
-    private SimuladorCuartoFrioIndustrial framePrincipal;
+    private ControladorInterfaces framePrincipal;
 
-    public ConfiguracionCuarto(SimuladorCuartoFrioIndustrial framePrincipal) {
+    public ConfiguracionCuarto(ControladorInterfaces framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
         tablaObjetos.setFillsViewportHeight(true);

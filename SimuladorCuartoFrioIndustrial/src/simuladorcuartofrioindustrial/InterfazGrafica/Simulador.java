@@ -1,12 +1,15 @@
-package simuladorcuartofrioindustrial;
+package simuladorcuartofrioindustrial.InterfazGrafica;
 
-public class SimuladorCFI extends javax.swing.JPanel {
+import simuladorcuartofrioindustrial.Sensores.SensorPuerta;
+import simuladorcuartofrioindustrial.Sensores.Sensor;
 
-    private SimuladorCuartoFrioIndustrial framePrincipal;
+public class Simulador extends javax.swing.JPanel {
+
+    private ControladorInterfaces framePrincipal;
     private java.time.LocalDateTime fechaHoraInicio;
     private String fechaHoraFormateada;
     
-    public SimuladorCFI(SimuladorCuartoFrioIndustrial framePrincipal) {
+    public Simulador(ControladorInterfaces framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
         
