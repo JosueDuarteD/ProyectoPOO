@@ -5,14 +5,17 @@ public class SensorTemperatura extends Sensor {
     public SensorTemperatura(String id, String nombre, double limiteInferior, double limiteSuperior) throws ParametroFueraDeRangoException {
         super(id, nombre, limiteInferior, limiteSuperior);
     }
-
+    
+    public SensorTemperatura(){
+    }
 //----------------------------------------------------------------------------------------------
     @Override
     public void procesarLectura(double valor) {
         try {
+            validarValor(valor);
             setValorActual(valor);
             System.out.println("Temperatura registrada: " + valor + " °C");
-        } catch (ParametroFueraDeRangoException e) {
+        } catch (RangoVacioException e) {
             System.out.println("ERROR, " + e.getMessage());
         }
     }

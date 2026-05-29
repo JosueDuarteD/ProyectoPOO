@@ -5,14 +5,18 @@ public class SensorPresion extends Sensor {
     public SensorPresion(String id, String nombre, double limiteInferior, double limiteSuperior) throws ParametroFueraDeRangoException {
         super(id, nombre, limiteInferior, limiteSuperior);
     }
+    
+    public SensorPresion(){
+    }
 
 //----------------------------------------------------------------------------------------------
     @Override
     public void procesarLectura(double valor) {
         try {
+            validarValor(valor);
             setValorActual(valor);
             System.out.println("Presion registrada: " + valor + " Pa");
-        } catch (ParametroFueraDeRangoException e) {
+        } catch (RangoVacioException e) {
             System.out.println("ERROR, " + e.getMessage());
         }
     }

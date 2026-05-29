@@ -36,4 +36,8 @@ public class GestorArchivos {
         }
         return archivos;
     }
+
+    public String getArchivo() {
+        return archivo;
+    }
 }

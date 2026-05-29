@@ -5,6 +5,9 @@ public class SensorPuerta extends Sensor {
     public SensorPuerta(String id, String nombre) throws ParametroFueraDeRangoException {
         super(id, nombre, 0, 1);
     }
+    
+    public SensorPuerta(){
+    }
 
 //----------------------------------------------------------------------------------------------
     @Override
@@ -12,8 +15,7 @@ public class SensorPuerta extends Sensor {
         try {
             verificarRangoBinario(valor);
             setValorActual(valor);
-            verificarPuertaAbierta(valor);
-        } catch (ParametroFueraDeRangoException | PuertaAbiertaException e) {
+        } catch (ParametroFueraDeRangoException e) {
             System.out.println("ERROR, " + e.getMessage());
         }
     }

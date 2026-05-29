@@ -21,4 +21,8 @@ public class GestorSensores {
     public void setSensores(ArrayList<Sensor> listaSensores) {
         this.listaSensores = listaSensores;
     }
+
+    public ArrayList<Sensor> getListaSensores() {
+        return listaSensores;
+    }
 }

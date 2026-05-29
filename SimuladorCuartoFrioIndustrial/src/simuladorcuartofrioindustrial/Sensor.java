@@ -18,12 +18,15 @@ public abstract class Sensor implements Serializable{
         this.limiteInferior = limiteInferior;
         this.limiteSuperior = limiteSuperior;
     }
+    
+    public Sensor(){
+    }
 
     public abstract void procesarLectura(double valor);
 
-    public void validarRango(double valor) throws ParametroFueraDeRangoException {
+    public void validarValor(double valor) throws RangoVacioException {
         if ((valor < limiteInferior || valor > limiteSuperior)) {
-            throw new ParametroFueraDeRangoException("El valor actual esta fuera de los limites");
+            throw new RangoVacioException("El valor actual esta fuera de los limites");
         }
     }
 
@@ -65,9 +68,9 @@ public abstract class Sensor implements Serializable{
         this.nombre = nombre;
     }
 
-    public void setValorActual(double valorActual) throws ParametroFueraDeRangoException {
-        validarRango(valorActual);
+    public void setValorActual(double valorActual){
         this.valorActual = valorActual;
+        //validarRango(valorActual);
     }
 
     public void setLimiteInferior(double limiteInferior) throws ParametroFueraDeRangoException {

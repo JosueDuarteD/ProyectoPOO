@@ -34,4 +34,8 @@ public class GestorPersistenciaSensores {
         }
         return sensores;
     }
+
+    public String getArchivo() {
+        return archivo;
+    }
 }

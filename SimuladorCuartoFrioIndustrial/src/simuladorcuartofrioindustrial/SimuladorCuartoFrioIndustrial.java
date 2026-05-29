@@ -7,9 +7,9 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SimuladorCuartoFrioIndustrial.class.getName());
 
-    private GestorPersistenciaSensores gestorPersistencia;
-    private GestorArchivos gestorArchivos;
-    private GestorSensores gestorSensores;
+    private GestorPersistenciaSensores gestorPersistencia = new GestorPersistenciaSensores("sin_nombre.bin");
+    private GestorArchivos gestorArchivos = new GestorArchivos("sin_nombre.txt");;
+    private GestorSensores gestorSensores = new GestorSensores();
     
     public SimuladorCuartoFrioIndustrial() {
         initComponents();
@@ -73,7 +73,6 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
         cargarObjetos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cargarObjetos.setForeground(new java.awt.Color(255, 255, 255));
         cargarObjetos.setText("Cargar objetos");
-        cargarObjetos.setActionCommand("Cargar objetos");
         cargarObjetos.setMaximumSize(new java.awt.Dimension(130, 40));
         cargarObjetos.setOpaque(true);
         cargarObjetos.setPreferredSize(new java.awt.Dimension(130, 40));
@@ -153,7 +152,7 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarTextoActionPerformed
 
     private void configurarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configurarCuartoActionPerformed
-        ConfigurarcionCuarto pagina = new ConfigurarcionCuarto();
+        ConfigurarcionCuarto pagina = new ConfigurarcionCuarto(this);
         MostrarPagina(pagina);
     }//GEN-LAST:event_configurarCuartoActionPerformed
 
@@ -207,6 +206,30 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new SimuladorCuartoFrioIndustrial().setVisible(true));
+    }
+    
+    public GestorSensores getGestorSensores() {
+        return gestorSensores;
+    }
+    
+    public GestorPersistenciaSensores getGestorPersistencia() {
+        return gestorPersistencia;
+    }
+    
+    public GestorArchivos getGestorArchivos() {
+        return gestorArchivos;
+    }
+    
+    public void setGestorSensores(GestorSensores gestorSensores) {
+        this.gestorSensores = gestorSensores;
+    }
+    
+    public void setGestorPersistencia(GestorPersistenciaSensores gestorPersistencia) {
+        this.gestorPersistencia = gestorPersistencia;
+    }
+    
+    public void setGestorArchivos(GestorArchivos gestorArchivos) {
+        this.gestorArchivos = gestorArchivos;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
