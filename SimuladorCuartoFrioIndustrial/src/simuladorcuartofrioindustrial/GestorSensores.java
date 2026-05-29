@@ -13,6 +13,12 @@ public class GestorSensores {
     public void agregarSensor(Sensor sensor) {
         listaSensores.add(sensor);
     }
+    
+    public void actualizarListaSensores(ArrayList<Sensor> nuevaLista) {
+        if (nuevaLista != null) {
+            this.listaSensores = nuevaLista;
+        }
+    }
 
     public ArrayList<Sensor> getSensores() {
         return listaSensores;

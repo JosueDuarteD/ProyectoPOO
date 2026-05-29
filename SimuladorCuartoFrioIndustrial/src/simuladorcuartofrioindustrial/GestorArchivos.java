@@ -15,7 +15,9 @@ public class GestorArchivos {
     public void escribirEnArchivo(String mensaje) {
         try {
             FileWriter escritor = new FileWriter(archivo, true);
-            escritor.write(LocalDateTime.now() + " -> " + "\n");
+            java.time.format.DateTimeFormatter formatoPersonalizado = java.time.format.DateTimeFormatter.ofPattern("'Fecha:' yyyy-MM-dd 'Hora:'HH:mm:ss");
+            String fechaHoraConFormato = java.time.LocalDateTime.now().format(formatoPersonalizado);
+            escritor.write(fechaHoraConFormato + " -> " + mensaje + "\n");
             escritor.close();
         } catch (IOException e) {
             System.out.println("ERROR AL ESCRIBIR");

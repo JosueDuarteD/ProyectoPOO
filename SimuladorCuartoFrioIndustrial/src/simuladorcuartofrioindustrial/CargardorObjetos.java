@@ -31,9 +31,9 @@ public class CargardorObjetos extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(700, 500));
 
         jLabel1.setBackground(new java.awt.Color(60, 98, 85));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Esta zona es para el archivo.bin (El de los objetos)");
+        jLabel1.setText("Cargar lista de Sensores");
         jLabel1.setMaximumSize(new java.awt.Dimension(310, 30));
         jLabel1.setOpaque(true);
         jLabel1.setPreferredSize(new java.awt.Dimension(310, 30));
@@ -51,8 +51,8 @@ public class CargardorObjetos extends javax.swing.JPanel {
                         .addGap(50, 50, 50)
                         .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(265, 265, 265)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -68,10 +68,36 @@ public class CargardorObjetos extends javax.swing.JPanel {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         String comando = evt.getActionCommand();
-        
         if (comando.equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
             java.io.File archivoSeleccionado = jFileChooser1.getSelectedFile();
-            this.framePrincipal.procesarArchivoCargado(archivoSeleccionado);
+
+            try {
+                this.framePrincipal.procesarArchivoCargado(archivoSeleccionado);
+                this.framePrincipal.recargarSensoresDesdeArchivoBinario();
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "¡Archivo de sensores cargado con éxito!\nOrigen: " + archivoSeleccionado.getName(),
+                    "Carga Exitosa",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+
+            } catch (Exception e) {
+                javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Error al procesar la estructura del archivo binario:\n" + e.getMessage(),
+                    "Error de Lectura",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+            }
+
+        } 
+        else if (comando.equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Operación cancelada por el usuario.",
+                "Información",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+            );
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 

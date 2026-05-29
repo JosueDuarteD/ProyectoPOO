@@ -10,6 +10,8 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     private GestorPersistenciaSensores gestorPersistencia = new GestorPersistenciaSensores("sin_nombre.bin");
     private GestorArchivos gestorArchivos = new GestorArchivos("sin_nombre.txt");;
     private GestorSensores gestorSensores = new GestorSensores();
+    private java.time.LocalDateTime fechaHoraInicio;
+    private String fechaHoraFormateada;
     
     public SimuladorCuartoFrioIndustrial() {
         initComponents();
@@ -142,7 +144,7 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void probarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarCuartoActionPerformed
-        SimuladorCFI pagina = new SimuladorCFI();
+        SimuladorCFI pagina = new SimuladorCFI(this);
         MostrarPagina(pagina);
     }//GEN-LAST:event_probarCuartoActionPerformed
 
@@ -152,7 +154,8 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarTextoActionPerformed
 
     private void configurarCuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configurarCuartoActionPerformed
-        ConfigurarcionCuarto pagina = new ConfigurarcionCuarto(this);
+        ConfiguracionCuarto pagina = new ConfiguracionCuarto(this);
+        pagina.restaurarTablas();
         MostrarPagina(pagina);
     }//GEN-LAST:event_configurarCuartoActionPerformed
 
@@ -180,6 +183,26 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
             this.gestorArchivos = new GestorArchivos(archivo.getName());
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Formato de archivo no soportado.");
+        }
+    }
+    
+    public void recargarSensoresDesdeArchivoBinario() {
+        if (this.getGestorPersistencia() != null) {
+            try {
+                java.util.ArrayList<Sensor> nuevosSensores = this.getGestorPersistencia().cargarSensores();
+
+                if (nuevosSensores != null) {
+                    this.getGestorSensores().getSensores().clear();
+                    this.getGestorSensores().getSensores().addAll(nuevosSensores);
+                    
+                    if (FondoVariable.getComponentCount() > 0 && FondoVariable.getComponent(0) instanceof ConfiguracionCuarto) {
+                        ConfiguracionCuarto config = (ConfiguracionCuarto) FondoVariable.getComponent(0);
+                        config.restaurarTablas();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error al cargar el archivo exterior: " + e.getMessage());
+            }
         }
     }
     
@@ -218,6 +241,10 @@ public class SimuladorCuartoFrioIndustrial extends javax.swing.JFrame {
     
     public GestorArchivos getGestorArchivos() {
         return gestorArchivos;
+    }
+    
+    public String getFechaHoraFormateada() {
+        return (fechaHoraFormateada != null) ? fechaHoraFormateada : "No iniciada";
     }
     
     public void setGestorSensores(GestorSensores gestorSensores) {

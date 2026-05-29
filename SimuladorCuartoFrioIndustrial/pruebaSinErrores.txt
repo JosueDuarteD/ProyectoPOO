@@ -1,0 +1,26 @@
+Fecha: 2026-05-29 Hora:17:02:41 -> 
+=================== REPORTE DE SIMULACIÓN ===================
+--- NUEVA SIMULACIÓN INICIADA [29/05/2026 17:02:39 ] ---
+[RESULTADO] Todos los sensores operan en rangos seguros.
+
+----------------- ESTADO ACTUAL DE SENSORES -----------------
+SensorTemperatura id: TEMP-1, nombre: Temp 1, valorActual: 8.0, limiteInferior: 0.0, limiteSuperior: 10.0}
+SensorTemperatura id: TEMP-2, nombre: Temp 2, valorActual: 11.0, limiteInferior: 0.0, limiteSuperior: 15.0}
+SensorTemperatura id: TEMP-3, nombre: Temp 3, valorActual: 5.0, limiteInferior: 0.0, limiteSuperior: 20.0}
+=============================================================
+
+Fecha: 2026-05-29 Hora:17:08:31 -> 
+=================== REPORTE DE SIMULACIÓN ===================
+--- NUEVA SIMULACIÓN INICIADA [29/05/2026 17:08:29 ] ---
+[ALERTA CRÍTICA] Presión 5 (ID: PRES-5) fuera de rango. Valor actual: 3.0 (Máximo permitido: 1.0)
+[RESULTADO] Simulación concluida con 1 anomalía(s) registrada(s).
+
+----------------- ESTADO ACTUAL DE SENSORES -----------------
+SensorTemperatura id: TEMP-1, nombre: Temp 1, valorActual: 8.0, limiteInferior: 0.0, limiteSuperior: 10.0}
+SensorTemperatura id: TEMP-2, nombre: Temp 2, valorActual: 11.0, limiteInferior: 0.0, limiteSuperior: 15.0}
+SensorTemperatura id: TEMP-3, nombre: Temp 3, valorActual: 5.0, limiteInferior: 0.0, limiteSuperior: 20.0}
+SensorPresion id: PRES-4, nombre: Presión 4, valorActual: 0.0, limiteInferior: 0.0, limiteSuperior: 1.0}
+SensorPresion id: PRES-5, nombre: Presión 5, valorActual: 3.0, limiteInferior: 0.0, limiteSuperior: 1.0}
+SensorPuerta id: PUER-6, nombre: Puerta 6, Estado puerta: Cerrada
+=============================================================
+

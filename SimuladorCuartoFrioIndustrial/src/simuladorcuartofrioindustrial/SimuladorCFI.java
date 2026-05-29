@@ -1,22 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package simuladorcuartofrioindustrial;
 
-/**
- *
- * @author Alberto
- */
 public class SimuladorCFI extends javax.swing.JPanel {
 
-    /**
-     * Creates new form SimuladorCFI
-     */
-    public SimuladorCFI() {
+    private SimuladorCuartoFrioIndustrial framePrincipal;
+    private java.time.LocalDateTime fechaHoraInicio;
+    private String fechaHoraFormateada;
+    
+    public SimuladorCFI(SimuladorCuartoFrioIndustrial framePrincipal) {
+        this.framePrincipal = framePrincipal;
         initComponents();
+        
+        jTextArea1.setEditable(false);
     }
-
+    
+    public void registrarBitacora(String mensaje) {
+        jTextArea1.append(mensaje + "\n");
+        jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
+    }
+    
+    public String obtenerHistorialAvisos() {
+        return jTextArea1.getText();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,35 +31,226 @@ public class SimuladorCFI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
+        iniciarSimulacion = new javax.swing.JButton();
+        guardarSensores = new javax.swing.JButton();
+        guardarTextos = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(60, 98, 85));
         setForeground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(700, 500));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Probar cuarto");
+        iniciarSimulacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        iniciarSimulacion.setText("Iniciar Simulación");
+        iniciarSimulacion.setPreferredSize(new java.awt.Dimension(127, 30));
+        iniciarSimulacion.addActionListener(this::iniciarSimulacionActionPerformed);
+
+        guardarSensores.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        guardarSensores.setText("Guardar Sensores");
+        guardarSensores.addActionListener(this::guardarSensoresActionPerformed);
+
+        guardarTextos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        guardarTextos.setText("Guardar Textos");
+        guardarTextos.addActionListener(this::guardarTextosActionPerformed);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(guardarSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(guardarTextos, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(iniciarSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(iniciarSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(guardarTextos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(guardarSensores)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void iniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSimulacionActionPerformed
+        if (framePrincipal == null || framePrincipal.getGestorSensores() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Error: El sistema base o el gestor de sensores no está inicializado.",
+                "Error de Inicialización", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        java.util.ArrayList<Sensor> sensores = framePrincipal.getGestorSensores().getSensores();
+        
+        if (sensores.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Aviso: La lista de sensores está vacía. No hay datos que evaluar.",
+                "Simulación Vacía", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        this.fechaHoraInicio = java.time.LocalDateTime.now();
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        this.fechaHoraFormateada = this.fechaHoraInicio.format(formato);
+
+        int contadorErrores = 0;
+        registrarBitacora("--- NUEVA SIMULACIÓN INICIADA [" + fechaHoraFormateada + " ] ---");
+        for (Sensor sensor : sensores) {
+            double valor = sensor.getValorActual();
+            double min = sensor.getLimiteInferior();
+            double max = sensor.getLimiteSuperior();
+
+            if (!(sensor instanceof SensorPuerta)) {
+                if (valor < min) {
+                    registrarBitacora("[ALERTA CRÍTICA] " + sensor.getNombre() + " (ID: " + sensor.getId() + 
+                                      ") fuera de rango. Valor actual: " + valor + " (Mínimo permitido: " + min + ")");
+                    contadorErrores++;
+                } else if (valor > max) {
+                    registrarBitacora("[ALERTA CRÍTICA] " + sensor.getNombre() + " (ID: " + sensor.getId() + 
+                                      ") fuera de rango. Valor actual: " + valor + " (Máximo permitido: " + max + ")");
+                    contadorErrores++;
+                }
+            } else {
+                if (valor == 1.0) {
+                    registrarBitacora("[ADVERTENCIA SEGURIDAD] " + sensor.getNombre() + " (ID: " + sensor.getId() + ") se encuentra ABIERTA.");
+                    contadorErrores++;
+                } else if (valor == 0.0) {
+                    registrarBitacora("[OK] " + sensor.getNombre() + " (ID: " + sensor.getId() + ") se encuentra CERRADA.");
+                } else {
+                    registrarBitacora("[AVISO PUERTA] " + sensor.getNombre() + " en estado desconocido: " + valor);
+                    contadorErrores++;
+                }
+            }
+        }
+        
+        if (contadorErrores > 0) {
+            registrarBitacora("[RESULTADO] Simulación concluida con " + contadorErrores + " anomalía(s) registrada(s).\n");
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Simulación completada.\nSe han detectado " + contadorErrores + " sensores fuera de los límites.\nRevisa la bitácora abajo.",
+                "Anomalías Detectadas", javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            registrarBitacora("[RESULTADO] Todos los sensores operan en rangos seguros.\n");
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "¡Simulación exitosa!\nTodos los sensores se encuentran dentro de sus límites de trabajo establecidos.",
+                "Estado Seguro", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_iniciarSimulacionActionPerformed
+
+    private void guardarTextosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarTextosActionPerformed
+        if (framePrincipal == null || framePrincipal.getGestorArchivos() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El gestor de archivos de texto no está listo.", 
+                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String contenidoBitacora = obtenerHistorialAvisos().trim();
+    
+        if (contenidoBitacora.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "La bitácora está vacía. No hay eventos de simulación que guardar.", 
+                "Aviso", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        try {
+            StringBuilder reporteCompleto = new StringBuilder();
+
+            reporteCompleto.append("\n=================== REPORTE DE SIMULACIÓN ===================\n");
+            reporteCompleto.append(contenidoBitacora);
+            reporteCompleto.append("\n\n----------------- ESTADO ACTUAL DE SENSORES -----------------\n");
+            
+            java.util.ArrayList<Sensor> listaSensores = framePrincipal.getGestorSensores().getSensores();
+            if (listaSensores.isEmpty()) {
+                reporteCompleto.append("(No hay sensores registrados en el sistema en este momento)\n");
+            } else {
+                for (Sensor sensor : listaSensores) {
+                    reporteCompleto.append(sensor.toString()).append("\n");
+                }
+            }
+            reporteCompleto.append("=============================================================\n");
+
+            framePrincipal.getGestorArchivos().escribirEnArchivo(reporteCompleto.toString());
+            registrarBitacora("[SISTEMA] Historial y volcado de sensores exportados con éxito al archivo TXT.");
+
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El reporte histórico y el estado de los objetos se guardaron con éxito.", 
+                "Guardado Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            registrarBitacora("[ERROR] No se pudo guardar el archivo de texto: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Fallo al escribir el archivo de texto: " + e.getMessage(), 
+                "Error de Archivo", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_guardarTextosActionPerformed
+
+    private void guardarSensoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarSensoresActionPerformed
+        if (framePrincipal == null || framePrincipal.getGestorPersistencia() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El gestor de persistencia binaria no está listo.", 
+                "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (framePrincipal.getGestorPersistencia() == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El gestor de persistencia binaria no está configurado.", 
+                "Error de Configuración", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        java.util.ArrayList<Sensor> listaSensores = framePrincipal.getGestorSensores().getSensores();
+    
+        if (listaSensores.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "No hay sensores cargados en la lista para exportar.", 
+                "Lista Vacía", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            framePrincipal.getGestorPersistencia().guardarSensores(listaSensores);
+
+            registrarBitacora("[PERSISTENCIA] Se respaldó con éxito la lista de " + listaSensores.size() + " sensores en formato binario.");
+
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Estructura binaria de sensores (.bin) respaldada correctamente.", 
+                "Guardado Exitoso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            registrarBitacora("[ERROR] Fallo crítico al escribir la persistencia de objetos: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Fallo al guardar el flujo de objetos: " + e.getMessage(), 
+                "Error Binario", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_guardarSensoresActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton guardarSensores;
+    private javax.swing.JButton guardarTextos;
+    private javax.swing.JButton iniciarSimulacion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
