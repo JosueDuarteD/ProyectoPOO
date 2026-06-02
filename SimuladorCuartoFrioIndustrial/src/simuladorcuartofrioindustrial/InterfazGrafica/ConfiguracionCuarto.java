@@ -355,8 +355,17 @@ public class ConfiguracionCuarto extends javax.swing.JPanel {
                     sensor.setValorActual(valActual);
                     
                     if (!(sensor instanceof SensorPuerta)) {
+                        if (limInferior < sensor.getLimiteSuperior()) {
                         sensor.setLimiteInferior(limInferior);
                         sensor.setLimiteSuperior(limSuperior);
+                    } else if (limSuperior > sensor.getLimiteInferior()) {
+                        sensor.setLimiteSuperior(limSuperior);
+                        sensor.setLimiteInferior(limInferior);
+                    } else {
+                        sensor.setLimiteSuperior(Double.MAX_VALUE); 
+                        sensor.setLimiteInferior(limInferior);
+                        sensor.setLimiteSuperior(limSuperior);
+                    }
                     }
                 }
             }
